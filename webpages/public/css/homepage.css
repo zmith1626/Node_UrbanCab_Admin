@@ -1,0 +1,116 @@
+body{
+background: #16315c;  /* fallback for old browsers */
+}
+
+#top_menu{
+    background: #16315c;
+    height: 10%;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+    margin-bottom: 0px;
+    color: #fff;
+}
+
+#main_div{
+    height: 90%;
+    margin-top: 0%;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: url("/assets/uc_image.jpg");
+    
+}
+
+#main_btn{
+    padding-top: 25%;
+    padding-left: 10%;
+    margin-top: 0;
+    color: #fafafa;
+    font-family: 'Ubuntu';
+}
+
+#title{
+    font-size: 60.0px;
+    font-family: 'Ubuntu';
+    margin-bottom: 0%;
+}
+
+#main_content_para{
+    font-size: 24.0px;
+    font-family: 'Ubuntu';
+}
+
+.ui.grid{
+    padding: 5%;
+}
+.nine.wide.column{
+    color: #fff;
+    font-family: 'Ubuntu';
+    font-size: 30px;
+}
+.seven.wide.column{
+    font-family: 'Ubuntu';
+    font-size: 20px;
+}
+.ui.button{
+    margin-top: 2%;
+}
+.ui.segment{
+    margin-bottom: 0%;
+}
+#insta{
+    background-color: crimson;
+}
+#btn-grp{
+    padding: 2%;
+}
+#final_div{
+    padding-left: 2%;
+    color: #000;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+}
+#drop_bio{
+    font-family: 'Ubuntu';
+    font-size: 30px;
+}
+#comfort_tags{
+    font-size: 24px;
+    font-family: 'Ubuntu';
+}
+#floating{
+    margin-top: 0px;
+}
+#floating_content{
+    font-family: 'Ubuntu';
+    font-size: 24px;
+}
+.ui.inverted.green.big.button{
+    margin-top: 0px;
+}
+.ui.center.aligned.icon.header{
+    padding-top: 10%;
+}
+.ui.center.aligned.segment.error.message{
+    margin-top: 0px;
+}
+.ui.form.segment{
+    width: 50%;
+    margin-left: 25%;
+}
+.ui.center.aligned.dividing.header{
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.ui.segment.error.message:hover{
+    background-color: #fff;
+    box-shadow: #000;
+}
+.ui.warning.message{
+    margin-left: 25%;
+    margin-bottom: 0%;
+    width: 50%;
+}
+#loginUserModal{
+    width: 50%;
+}

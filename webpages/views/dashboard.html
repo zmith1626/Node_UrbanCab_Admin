@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=10, user-scalable=0, shrink-to-fit=no">
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboardpage.css" type="text/css">
+    <title>Expange</title>
+</head>
+
+<body>
+    <div class="ui secondary pointing inverted menu" id="top_menu">
+        <a href="http://localhost:4000" class="item menu topmenu">
+            <i class="home icon"></i>
+            Expange
+        </a>
+        <a class="item menu active topmenu" id="dashboard">
+            <i class="chart line icon"></i>
+            Dashboard
+        </a>
+        <div class="right menu topmenu">
+            <a class="menu item" id="logout">
+                <i class="sign out icon"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+    <div id="maincontent">
+        <div class="ui modal rest" id="messageModal">
+            <div class="header" id="messageHeader"></div>
+            <div class="content" id="messageContent">
+            </div>
+            <div class="actions">
+                <div class="ui approve positive button" id="messageButton"></div>
+            </div>
+        </div>
+        <div class="ui grid">
+            <div class="three wide column">
+                <div class="ui vertical fluid tabular menu">
+                    <a class="active item menu sidemenu" id="1">
+                        New Registration
+                    </a>
+                    <a class="item menu sidemenu" id="2">
+                        Create Account
+                    </a>
+                    <a class="item menu sidemenu" id="3">
+                        Delete Account/User
+                    </a>
+                    <a class="item menu sidemenu" id="4">
+                        View User Details
+                    </a>
+                </div>
+            </div>
+            <div class="nine wide stretched column">
+                <div class="ui modal rest" id="signOutModal">
+                    <div class="header"><i class="exclamation icon"></i> Please Confirm</div>
+                    <div class="content">
+                        <p>Are you sure, you want to logout ?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui approve positive button">Approve</div>
+                        <div class="ui cancel negative button">Decline</div>
+                    </div>
+                </div>
+                <div class="ui segment divone">
+                    <form class="ui form" id="vehicleReg">
+                        <h4 class="ui dividing header">
+                            <i class="car icon"></i>
+                            Vehicle Information</h4>
+                        <div class="required field">
+                            <label>Model</label>
+                            <div class="field">
+                                <input name="model" type="text" placeholder="Vehicle Model">
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <label>Year</label>
+                            <div class="fields">
+                                <div class="twelve wide field">
+                                    <input name="year" type="number" placeholder="Year">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twelve wide field">
+                            <div class="required field">
+                                <label>VIN</label>
+                                <input name="vin" type="text" placeholder="VIN">
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="twelve wide field">
+                                <label>Registration No.</label>
+                                <input name="registration" type="text" placeholder="Registration Number">
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="twelve wide field">
+                                <label>Primary Driver Associated</label>
+                                <input name="driver" type="text" placeholder="Driver ID">
+                            </div>
+                        </div>
+                        <h4 class="ui dividing header">
+                            <i class="user outline icon"></i>
+                            Owner Information
+                        </h4>
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="required field">
+                                    <label>First Name</label>
+                                    <input name="fName" type="text" placeholder="First Name">
+                                </div>
+                                <div class="required field">
+                                    <label>Last Name</label>
+                                    <input name="lName" type="text" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>Phone</label>
+                                <div class="field">
+                                    <input name="phone" type="number" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>Government ID Type</label>
+                                <div class="field">
+                                    <select name="ownerIdType" class="ui fluid dropdown">
+                                        <option value="">ID Type</option>
+                                        <option value="voter">Voter Card</option>
+                                        <option value="aadhar">Aadhar Card</option>
+                                        <option value="DL">Driving License</option>
+                                        <option value="bank">Bank Statement</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>ID Number</label>
+                                <div class="field">
+                                    <input name="id" type="text" placeholder="Document Identification Number">
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>Owner Address</label>
+                                <div class="fields">
+                                    <div class="four wide field">
+                                        <input type="text" name="house" placeholder="House No.">
+                                    </div>
+                                    <div class="twelve wide field">
+                                        <input type="text" name="address" placeholder="Street Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>State</label>
+                                    <select name="state" class="ui fluid dropdown">
+                                        <option value="">State</option>
+                                        <option value="AP">Andhra Pradesh</option>
+                                        <option value="AR">Arunachal Pradesh</option>
+                                        <option value="AS">Assam</option>
+                                        <option value="BR">Bihar</option>
+                                        <option value="CH">Chhattisgarh</option>
+                                        <option value="GA">Goa</option>
+                                        <option value="HR">Haryana</option>
+                                        <option value="HP">Himachal Pradesh</option>
+                                        <option value="JH">Jharkhand</option>
+                                        <option value="KA">Karnataka</option>
+                                        <option value="KL">Kerala</option>
+                                        <option value="MP">Madhya Pradesh</option>
+                                        <option value="MH">Maharashtra</option>
+                                        <option value="MA">Manipur</option>
+                                        <option value="MZ">Mizoram</option>
+                                        <option value="ML">Meghalaya</option>
+                                        <option value="NL">NagaLand</option>
+                                        <option value="OR">Odisha</option>
+                                        <option value="PB">Punjab</option>
+                                        <option value="RJ">Rajasthan</option>
+                                        <option value="SK">Sikkim</option>
+                                        <option value="TN">Tamil Nadu</option>
+                                        <option value="TL">Telangana</option>
+                                        <option value="TR">Tripura</option>
+                                        <option value="UP">UttarPradesh</option>
+                                        <option value="UK">Uttarakhand</option>
+                                        <option value="WB">West Bengal</option>
+                                    </select>
+                                </div>
+                                <div class="required field">
+                                    <label>PIN</label>
+                                    <div class="field">
+                                        <input name="pin" type="text" placeholder="PIN CODE">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="ui dividing header">
+                            <i class="paragraph icon"></i>
+                            Capacity and Stop Point Information</h4>
+                        Select Vehicle Type --
+                        <div class="ui button" id="public">Public Cab</div>
+                        <div class="ui button" id="private">Private Cab</div>
+                        <div class="ui clearing divider"></div>
+                        <div id="publicCab">
+                            <div class="two fields">
+                                <div class="required field">
+                                    <label>Seating capacity</label>
+                                    <div class="field">
+                                        <input name="seat" type="number" placeholder="Seat Capacity">
+                                    </div>
+                                </div>
+                                <div class="required field">
+                                    <label>Start time</label>
+                                    <div class="field">
+                                        <input name="time" type="text"
+                                            placeholder="Start time in 24 hours format, E.g. 23:30">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="required field">
+                                <label>Stoppage</label>
+                                <div class="field">
+                                    <input name="stop" type="text" placeholder="E.g. Dibrugarh, Chabua, Tinsukia">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required field" id="privateCab">
+                            <label>Cab Type</label>
+                            <div class="fields">
+                                <select name="cabType" class="ui fluid dropdown">
+                                    <option value="">-- Cab Type --</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4 class="ui dividing header"></h4>
+                        <div class="field">
+                            <div class="ui checkbox field">
+                                <input name="terms" type="checkbox">
+                                <label>I agree to the Terms and Conditions</label>
+                            </div>
+                        </div>
+                        <button class="ui primary button" id="Register">
+                            <i class="pencil alternate icon"></i>
+                            Register</button>
+                        <div class="ui error message"></div>
+                    </form>
+                </div>
+                <div class="ui segment divtwo">
+                    <form class="ui form" id="createAccnt">
+                        <h4 class="ui dividing header">
+                            <i class="edit icon"></i>
+                            Account Information</h4>
+                        <div class="two fields">
+                            <div class="required field">
+                                <label>First Name</label>
+                                <input name="fName" type="text" placeholder="First Name">
+                            </div>
+                            <div class="required field">
+                                <label>Last Name</label>
+                                <input name="lName" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>License No.</label>
+                                <div class="field">
+                                    <input name="License" type="text" placeholder="Driving License Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>Vehicle No.</label>
+                                <div class="field">
+                                    <input name="vehicle" type="text" placeholder="Vehicle Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>Email</label>
+                                <div class="field">
+                                    <input name="email" type="text" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>Phone</label>
+                                <div class="field">
+                                    <input name="phone" type="text" placeholder="Contact No.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>Password</label>
+                                <div class="field">
+                                    <input name="password" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required fields">
+                            <div class="sixteen wide field">
+                                <label>Confirm Password</label>
+                                <div class="field">
+                                    <input name="confirmpassword" type="password" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox field">
+                                <input name="terms" type="checkbox">
+                                <label>I agree to the Terms and Conditions</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <button class="ui blue button" id="cAccnt">
+                                <i class="pencil alternate icon"></i>
+                                Create Account</button>
+                        </div>
+                        <div class="ui error message"></div>
+                    </form>
+                </div>
+                <div class="ui segment divthree">
+                    <div class="ui modal" id="deleteAccntModal">
+                        <div class="header"><i class="exclamation icon"></i> Please Confirm</div>
+                        <div class="content">
+                            <p>Are you sure, you want to delete ?</p>
+                        </div>
+                        <div class="actions">
+                            <div class="ui approve positive button">Approve</div>
+                            <div class="ui cancel negative button">Decline</div>
+                        </div>
+                    </div>
+                    <form class="ui form" id="delAccnt">
+                        <h4 class="ui dividing header">
+                            <i class="trash icon"></i>
+                            Delete Account/User</h4>
+                        <div class="required field">
+                            <label>Account/User ID</label>
+                            <div class="field">
+                                <input name="accountID" type="text" placeholder="Account/User ID">
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="eight wide field">
+                                <button class="ui red fluid button" id="dAccnt">
+                                    <i class="trash icon"></i>
+                                    Delete Account</button>
+                            </div>
+                        </div>
+                        <div class="ui error message"></div>
+                    </form>
+                </div>
+                <div class="ui segment divfour">
+                    <div class="ui modal" id="deleteAccntModal">
+                        <div class="header"><i class="exclamation icon"></i> Please Confirm</div>
+                        <div class="content">
+                            <p>Are you sure, you want to delete ?</p>
+                        </div>
+                        <div class="actions">
+                            <div class="ui approve positive button">Approve</div>
+                            <div class="ui cancel negative button">Decline</div>
+                        </div>
+                    </div>
+                    <form class="ui form" id="delAccnt">
+                        <h4 class="ui dividing header">
+                            <i class="user icon"></i>
+                            User Information</h4>
+                        <div class="required field">
+                            <label>User E-mail</label>
+                            <div class="field">
+                                <input name="accountID" type="text" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="eight wide field">
+                                <button class="ui primary fluid button" id="dAccnt">
+                                    <i class="search icon"></i>
+                                    Search User</button>
+                            </div>
+                        </div>
+                        <div class="ui error message"></div>
+                    </form>
+                    <div class="ui grid">
+                        <div class="ten wide column">
+                            <p>User Name</p>
+                            <p>User E-mail</p>
+                            <p>User Phone</p>
+                            <p>User Photo</p>
+                        </div>
+                        <div class="six wide column">
+                            <img class="ui rounded image"
+                                src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+                        </div>
+                    </div>
+                </div>
+                <div class="bottomSpacing"></div>
+            </div>
+            <div class="four wide column">
+                <div class="ui large vertical menu">
+                    <a class="item">
+                        <div class="ui small teal label" id="create">0</div>
+                        <i class="pencil alternate icon"></i>
+                        Create
+                    </a>
+                    <a class="item">
+                        <div class="ui small red label" id="delete">0</div>
+                        <i class="trash icon"></i>
+                        Delete
+                    </a>
+                    <a class="item">
+                        <div class="ui small blue label" id="update">0</div>
+                        <i class="edit icon"></i>
+                        Update
+                    </a>
+                    <a class="item">
+                        <div class="ui small red error label" id="errors">0</div>
+                        <i class="exclamation circle icon"></i>
+                        Errors
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui blue inverted segment" id="footer">
+        <div id='btn-grp'>
+            Follow us on
+            <a class="ui circular facebook icon button" href="https://www.facebook.com/Urban-cab-2343175462427541/">
+                <i class="facebook icon"></i>
+                facebook
+            </a>
+            <button class="ui circular twitter icon button">
+                <i class="twitter icon"></i>
+                twitter
+            </button>
+            <a class="ui circular instagram button" id="insta" href="https://www.instagram.com/caburban/">
+                <i class="instagram icon"></i>
+                Instagram
+            </a>
+        </div>
+        <div id="mainlink">
+            www.UrbanCab.Com
+        </div>
+    </div>
+
+    <script src="/script/webconfig.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/script/jQuery-3.4.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="/script/dashboardscript.js" type="text/javascript"></script>
+</body>
+
+</html>

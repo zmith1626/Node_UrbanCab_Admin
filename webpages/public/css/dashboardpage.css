@@ -1,0 +1,45 @@
+#top_menu{
+    background: #16315c;
+    height: 10%;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+    margin-bottom: 0px;
+    color: #fff;
+}
+.active.item.menu.sidemenu{
+    color: #000;
+}
+#footer{
+    background-color: #16315c;
+    margin-bottom: 0%;
+}
+#insta{
+    background: crimson;
+}
+.divtwo{
+    display: none;
+}
+.divthree{
+    display: none;
+}
+.bottomSpacing{
+    height: 400px;
+}
+#maincontent{
+    margin-top: 2%;
+}
+#privateCab{
+    display: none;
+}
+#publicCab{
+    display: none;
+}
+#deleteAccntModal{
+    width: 50%;
+}
+#signOutModal{
+    width: 50%;
+}
+#messageModal{
+    width: 50%;
+}
